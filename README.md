@@ -1,2 +1,2 @@
 # APCUPS
-[] - Zdać to i spadać
+- [ ] Zdać to i spadać
