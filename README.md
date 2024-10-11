@@ -8,3 +8,9 @@ TODO:
 6. [ ] Testowanie działania
 7. [ ] Testowanie przenośności (praktycznie gwarantowane ale lepiej sprawdzić)
 9. [ ] Zdać to i spadać
+
+
+- [ ] Instrukcja
+- [ ] Skrypt instalacyjny
+- [ ] Skrypt w Pythonie do wysyłania maili
+- [ ] Domena stała
