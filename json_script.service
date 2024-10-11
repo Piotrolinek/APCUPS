@@ -2,4 +2,4 @@
 Description=Script to generate JSON every second
 
 [Service]
-ExecStart=/path/to/your/json_script.sh
+ExecStart=/home/cti/APCUPS/json_script.sh

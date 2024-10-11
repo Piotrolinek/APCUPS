@@ -33,10 +33,34 @@
 	4.1 Wykonanie polecenia "sudo apt update; sudo apt upgrade -y" UWAGA: w zależności od szybkości połączenia to polecenie może się wykonywać nawet do 2 godzin!
 5. Git
 	5.1 "sudo apt install git"
-	5.2 "git clone https://github.com/Piotrolinek/APCUPS.git"
+	5.2 "git clone https://github.com/Piotrolinek/APCUPS.git" - repozytorium jest publiczne by ominąć problem logowania w konsoli (od 2021 roku wymagane jest generowanie tymczasowych kluczy dostępowych).
 6. Instalacja serwera nginx
 	6.1 "sudo apt install nginx"
 	6.2 Weryfikacja działania usługi systemowej: "systemctl status nginx"
 	6.3 Jeżeli z jakiegoś powodu jest stan disabled lub konfiguracja zachowawcza nie jest ustawiona należy ustawić: "systemctl enable nginx; systemctl start nginx"
 	6.4 Weryfikacja strony podstawowej, czyli na innym komputerze w tej samej sieci lokalnej, w przeglądarce należy wpisać adres ip raspberry (hostname -I), powinien pojawić się podstawowy plik serwera nginx: "Welcome to nginx! If you see this page, the nginx web server is successfully installed and working. Further configuration is required. [...]"
 	6.5 Usunięcie postawowej strony (zostanie ona zastąpiona przygotowaną przez nas) "rm /var/www/html/index.nginx-debian.html"
+7. Instalacja pakietu apcupsd:
+	7.1 "sudo apt install apcupsd -y"
+	7.2 Testowanie działania: "systemctl status apcupsd"
+	7.3 Konfiguracja połączenia: "nano /etc/apcupsd/apcupsd.conf"
+		7.3.1 Wartość "UPSCABLE usb" (domyślnie)
+		7.3.2 Wartość "UPSTYPE usb" (domyślnie)
+		7.3.3 Wartość "DEVICE" (należy usunąć wartość domyślną i pozostawić jedynie DEVICE)
+	7.4 Po ustawieniu tych wartości należy ustawić flagę "ISCONFIGURED=yes" w pliku "/etc/default/apcupsd"
+	7.5 Wykonanie testu połączenia: 
+		7.5.1 By móc wykonać test usługa apcupsd musi być zatrzymana: "sudo systemctl stop apcupsd"
+		7.5.2 "apctest"
+		7.5.3 Można wybrać spośród opcji testowania urządzenia lub wyjść (q)
+	7.6 Uruchomienie usługi "sudo systemctl enable apcupsd; sudo systemctl start apcupsd"
+	7.7 Sprawdzenie statusu: "apcaccess status"
+		7.7.1 "STATUS: COMMLOST" oznacza, że połączenie nie powiodło się. Jest to normalne za pierwszym razem i należy zrestartować system ("reboot"). Jeżeli po restarcie nadal STATUS: COMMLOST, oznacza że pewien krok instrukcji został wykonany niepoprawnie lub został pominięty. 
+	7.8 Dalsza konfiguracja zostaje defaultowa. https://wiki.debian.org/apcupsd
+8. Przenoszenie plików w odpowiednie miejsca z repozytorium:
+	8.1 "cd /sciezka/do/APCUPS"
+	8.2 "mv ./index.html /var/www/html/"
+	8.3 "mv ./json_script.service /etc/systemd/system/"
+	8.4 "mv ./json_script.timer  /etc/systemd/system/"
+	8.5 Nadanie prawa wykonywania dla skryptu "chmod +x ./json_script.sh"
+	8.6 Modyfikacja ścieżki do skryptu "nano /etc/systemd/system/json_script.service". domyślnie jest to wartość "/home/cti/APCUPS/json_script.sh"
+	8.7 Aktywacja usług: "sudo systemctl enable json_script.timer; sudo systemctl start json_script.timer"
