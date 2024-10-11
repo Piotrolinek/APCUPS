@@ -34,3 +34,9 @@
 5. Git
 	5.1 "sudo apt install git"
 	5.2 "git clone https://github.com/Piotrolinek/APCUPS.git"
+6. Instalacja serwera nginx
+	6.1 "sudo apt install nginx"
+	6.2 Weryfikacja działania usługi systemowej: "systemctl status nginx"
+	6.3 Jeżeli z jakiegoś powodu jest stan disabled lub konfiguracja zachowawcza nie jest ustawiona należy ustawić: "systemctl enable nginx; systemctl start nginx"
+	6.4 Weryfikacja strony podstawowej, czyli na innym komputerze w tej samej sieci lokalnej, w przeglądarce należy wpisać adres ip raspberry (hostname -I), powinien pojawić się podstawowy plik serwera nginx: "Welcome to nginx! If you see this page, the nginx web server is successfully installed and working. Further configuration is required. [...]"
+	6.5 Usunięcie postawowej strony (zostanie ona zastąpiona przygotowaną przez nas) "rm /var/www/html/index.nginx-debian.html"

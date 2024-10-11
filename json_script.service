@@ -1,0 +1,5 @@
+[Unit]
+Description=Script to generate JSON every second
+
+[Service]
+ExecStart=/path/to/your/json_script.sh
