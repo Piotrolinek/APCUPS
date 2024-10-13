@@ -1,0 +1,16 @@
+[Unit]
+Description=Start Ngrok tunnel on startup
+After=network-online.target
+Wants=network-online.target systemd-networkd-wait-online.service
+
+[Service]
+ExecStart=/usr/local/bin/ngrok http --url=profound-warthog-model.ngrok-free.app 80 --basic-auth "cti:PolitechnikaLodzkaCTI"
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+IgnoreSIGPIPE=true
+Restart=always
+RestartSec=3
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

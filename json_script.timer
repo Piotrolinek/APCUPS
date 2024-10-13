@@ -2,6 +2,7 @@
 Description=Run json_script.sh every second
 
 [Timer]
+OnBootSec=10s
 OnUnitActiveSec=1s
 AccuracySec=1s
 

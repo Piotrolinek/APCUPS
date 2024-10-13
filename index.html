@@ -44,7 +44,7 @@
 
 <script>
     function fetchUPSData() {
-        fetch('/apcstatus.json')
+        fetch('./apcstatus.json')
             .then(response => response.json())
             .then(data => {
                 const tableBody = document.querySelector("#upsTable tbody");
@@ -70,7 +70,7 @@
     }
 
     // Fetch data every 1 second
-    setInterval(fetchUPSData, 1000); // 1000 ms = 1 second
+    setInterval(fetchUPSData, 500); // 1000 ms = 1 second
 
     // Initial fetch
     fetchUPSData();
