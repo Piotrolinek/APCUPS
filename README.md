@@ -4,9 +4,9 @@
     1.2 System operacyjny: Raspberry Pi OS (other) -> Raspberry Pi OS Lite (32-bit)
     1.3 Konfiguracja systemu:
         1.3.1 Hostname: dowolny (instrukcja zakłada "cti" za domyślną wartość)
-	1.3.2 Login i hasło: głównie do połączenia przez SSH, np. cti; cti
-	1.3.3 Sieć wifi: rasp1 nie posiada wbudowanego modułu wifi więc wypełnienie jest opcjonalne
-	1.3.4 Usługi: Włącz SSH uwierzytelniane hasłem
+        1.3.2 Login i hasło: głównie do połączenia przez SSH, np. cti; cti
+        1.3.3 Sieć wifi: rasp1 nie posiada wbudowanego modułu wifi więc wypełnienie jest opcjonalne
+        1.3.4 Usługi: Włącz SSH uwierzytelniane hasłem
 3. Pierwsze uruchomienie systemu
 	2.1 Zmiana rozkładu klawiatury z UK na US. Graficzny poradnik: https://linuxconfig.org/how-to-change-keyboard-layout-on-raspberry-pi
 		2.1.1 sudo raspi-config
