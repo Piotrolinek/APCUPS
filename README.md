@@ -121,7 +121,7 @@
 		12.7.2 "systemctl enable ngrok_starter.service"
 		12.7.3 Jeżeli ngrok nie pracuje obecnie można także uruchomić go w ten sposób: "systemctl start ngrok_starter.service"
 	12.8 (Opcjonalnie) Jest także możliwe zapisanie stałych ustawień tunelowania do pliku konfguracyjnego (lokalizacja podana zostaje po wpisaniu authtokenu, zazwyczaj jest to "/root/.ngrok2/ngrok.yml")
-14. DHCP (Opcjonalnie) Jako, że ngrok pozwala na więcej, ustawienie "stałego" ip jest mniej ważne, ale jeżeli jest wymagane to też zostanie zawarte w instrukcji:
+14. "Stałe" IP (Opcjonalnie) Jako, że ngrok pozwala na więcej, ustawienie "stałego" ip jest mniej ważne, ale jeżeli jest wymagane to też zostanie zawarte w instrukcji:
 	13.1 "nano /etc/network/interfaces"
 	13.2 "
 		iface eth0 inet static
