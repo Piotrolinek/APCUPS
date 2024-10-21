@@ -1,13 +1,13 @@
 # APCUPS Monitor - Instrukcja
 1. Instalacja systemu (ok 15 minut)
-	1.1 https://www.raspberrypi.com/software/
-	1.2 System operacyjny: Raspberry Pi OS (other) -> Raspberry Pi OS Lite (32-bit)
-	1.3 Konfiguracja systemu:
-		1.3.1 Hostname: dowolny (instrukcja zakłada "cti" za domyślną wartość)
-		1.3.2 Login i hasło: głównie do połączenia przez SSH, np. cti; cti
-		1.3.3 Sieć wifi: rasp1 nie posiada wbudowanego modułu wifi więc wypełnienie jest opcjonalne
-		1.3.4 Usługi: Włącz SSH uwierzytelniane hasłem
-2. Pierwsze uruchomienie systemu
+    1.1 https://www.raspberrypi.com/software/
+    1.2 System operacyjny: Raspberry Pi OS (other) -> Raspberry Pi OS Lite (32-bit)
+    1.3 Konfiguracja systemu:
+        1.3.1 Hostname: dowolny (instrukcja zakłada "cti" za domyślną wartość)
+        1.3.2 Login i hasło: głównie do połączenia przez SSH, np. cti; cti
+        1.3.3 Sieć wifi: rasp1 nie posiada wbudowanego modułu wifi więc wypełnienie jest opcjonalne
+        1.3.4 Usługi: Włącz SSH uwierzytelniane hasłem
+3. Pierwsze uruchomienie systemu
 	2.1 Zmiana rozkładu klawiatury z UK na US. Graficzny poradnik: https://linuxconfig.org/how-to-change-keyboard-layout-on-raspberry-pi
 		2.1.1 sudo raspi-config
 		2.1.2 (5) Localisation Options
@@ -28,20 +28,20 @@
 		2.2.5 Połączenie: "sudo nmcli dev wifi connect wybrany_SSID_do_wypelnienia password "haslo_do_wypelnienia"
 		2.2.6 Alternatywnie "sudo nmcli --ask dev wifi connect wybrany_SSID_do_wypelnienia" i podanie hasla ukrytego
 		2.2.7 Weryfikacja połączenia w dowolny sposób, np. ping google.com
-3. Połączenie SSH (opcjonalne):
+4. Połączenie SSH (opcjonalne):
 	3.1 Np. przy użyciu PuTTy, łączymy po ip, (hostname -I), port 22, login oraz hasło takie jakie zostało podane przy instalacji systemu
-4. Aktualizacja systemu (rekomendowane):
+5. Aktualizacja systemu (rekomendowane):
 	4.1 Wykonanie polecenia "sudo apt update; sudo apt upgrade -y" UWAGA: w zależności od szybkości połączenia to polecenie może się wykonywać nawet do 2 godzin!
-5. Git
+6. Git
 	5.1 "sudo apt install git"
 	5.2 "git clone https://github.com/Piotrolinek/APCUPS.git" - repozytorium jest publiczne by ominąć problem logowania w konsoli (od 2021 roku wymagane jest generowanie tymczasowych kluczy dostępowych).
-6. Instalacja serwera nginx
+7. Instalacja serwera nginx
 	6.1 "sudo apt install nginx"
 	6.2 Weryfikacja działania usługi systemowej: "systemctl status nginx"
 	6.3 Jeżeli z jakiegoś powodu jest stan disabled lub konfiguracja zachowawcza nie jest ustawiona należy ustawić: "systemctl enable nginx; systemctl start nginx"
 	6.4 Weryfikacja strony podstawowej, czyli na innym komputerze w tej samej sieci lokalnej, w przeglądarce należy wpisać adres ip raspberry (hostname -I), powinien pojawić się podstawowy plik serwera nginx: "Welcome to nginx! If you see this page, the nginx web server is successfully installed and working. Further configuration is required. [...]"
 	6.5 Usunięcie postawowej strony (zostanie ona zastąpiona przygotowaną przez nas) "rm /var/www/html/index.nginx-debian.html"
-7. Instalacja pakietu apcupsd:
+8. Instalacja pakietu apcupsd:
 	7.1 "sudo apt install apcupsd -y"
 	7.2 Testowanie działania: "systemctl status apcupsd"
 	7.3 Konfiguracja połączenia: "nano /etc/apcupsd/apcupsd.conf"
@@ -57,7 +57,7 @@
 	7.7 Sprawdzenie statusu: "apcaccess status"
 		7.7.1 "STATUS: COMMLOST" oznacza, że połączenie nie powiodło się. Jest to normalne za pierwszym razem i należy zrestartować system ("reboot"). Jeżeli po restarcie nadal STATUS: COMMLOST, oznacza że pewien krok instrukcji został wykonany niepoprawnie lub został pominięty. 
 	7.8 Dalsza konfiguracja zostaje defaultowa. https://wiki.debian.org/apcupsd
-8. Przenoszenie plików w odpowiednie miejsca z repozytorium:
+9. Przenoszenie plików w odpowiednie miejsca z repozytorium:
 	8.1 "cd /sciezka/do/APCUPS"
 	8.2 "mv ./index.html /var/www/html/"
 	8.3 "mv ./json_script.service /etc/systemd/system/"
@@ -65,7 +65,7 @@
 	8.5 Nadanie prawa wykonywania dla skryptu "chmod +x ./json_script.sh"
 	8.6 Modyfikacja ścieżki do skryptu "nano /etc/systemd/system/json_script.service". domyślnie jest to wartość "/home/cti/APCUPS/json_script.sh"
 	8.7 Aktywacja usług: "sudo systemctl enable json_script.timer; sudo systemctl start json_script.timer"
-9. Wysyłanie maili
+10. Wysyłanie maili
 	9.1 Cała funkcjonalność jest opcjonalna (ale rekomendowana)
 	9.2 Plik konfiguracyjny: "sender_config.ini"
 		9.2.1 W przypadku utraty tego pliku wystarczy uruchomić skrypt "config_writer.py"
@@ -84,12 +84,12 @@
 		9.3.1 "nano /etc/apcupsd/onbattery" zaraz po komentarzu należy wkleić: "python /home/cti/APCUPS/sender.py --onbatt"
 		9.3.2 "nano /etc/apcupsd/offbattery" zaraz po komentarzu należy wkleić: "python /home/cti/APCUPS/sender.py --offbatt"
 		9.3.3 "nano /home/cti/APCUPS/sender.py" linia 9, należy zmodyfikować ścieżkę do pliku konfiguracyjnego jeżeli nie jest ona domyślna ("/home/cti/APCUPS/sender_config.ini")
-10. Nadanie praw wykonywania:
+11. Nadanie praw wykonywania:
 	10.1 Będąc w katalogu repozytorium (APCUPS) należy nadać uprawnienia wykonywania wszystkim plikom .sh i .py:
 		10.1.1 "chmod +x ./config_writer.py"
 		10.1.2 "chmod +x ./json_script.sh"
 		10.1.3 "chmod +x ./sender.py"
-11. Tworzenie poczty Google
+12. Tworzenie poczty Google
 	11.1 Serwer SMTP Google pozwala na wysłanie do 200 maili dziennie i przede wszystkim - jest darmowy. Poszukiwaliśmy alternatywy przez kilka godzin bez skutku, więc pozostajemy przy dosyć niewygodnym serwisie Google.
 	11.2 Adres jak i hasło jest zupełnie dowolne, zakładanie poczty jest wystarczająco intuicyjne by pominąć tą część poradnika.
 	11.3 Po założeniu poczty musi zostać założone 2FA (Uwierzytelnianie dwuskładnikowe) przy użyciu numeru telefonu.
@@ -99,7 +99,7 @@
 		11.4.3 Generujemy hasło do aplikacji (sama nazwa aplikacji nie ma znaczenia i może być dowolna)
 		11.4.4 Otrzymujemy hasło do aplikacji w formie "xxxx xxxx xxxx xxxx"
 		11.4.5 To hasło wklejamy do pliku konfiguracyjnego "sender_config.ini", pole "sender_application_password"
-12. Ngrok
+13. Ngrok
 	12.1 Założenie konta na stronie https://ngrok.com/ (jest opcja logowania przy użyciu konta Google)
 	12.2 Po zalogowaniu, na panelu z lewej strony, sekcja Getting Started -> Your Authtoken - jest to token uwierzytelniania. Zostanie on użyty za chwilę, jeżeli z jakiegoś względu go nie ma, należy go wygenerować.
 	12.3 Pobranie pakietu (komenda pochodzi z oficjalnej strony https://ngrok.com/download):
@@ -121,7 +121,7 @@
 		12.7.2 "systemctl enable ngrok_starter.service"
 		12.7.3 Jeżeli ngrok nie pracuje obecnie można także uruchomić go w ten sposób: "systemctl start ngrok_starter.service"
 	12.8 (Opcjonalnie) Jest także możliwe zapisanie stałych ustawień tunelowania do pliku konfguracyjnego (lokalizacja podana zostaje po wpisaniu authtokenu, zazwyczaj jest to "/root/.ngrok2/ngrok.yml")
-13. DHCP (Opcjonalnie) Jako, że ngrok pozwala na więcej, ustawienie "stałego" ip jest mniej ważne, ale jeżeli jest wymagane to też zostanie zawarte w instrukcji:
+14. DHCP (Opcjonalnie) Jako, że ngrok pozwala na więcej, ustawienie "stałego" ip jest mniej ważne, ale jeżeli jest wymagane to też zostanie zawarte w instrukcji:
 	13.1 "nano /etc/network/interfaces"
 	13.2 "
 		iface eth0 inet static
