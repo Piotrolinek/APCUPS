@@ -1,11 +1,16 @@
 #!/bin/bash
 
 ######################################################
+# This variable needs to be fixed before running!    #
+# Currently it is using a default value, if you had  #
+# used a different one, installation will fail!      #
+######################################################
 # Ta sekcja musi byc poprawiona przed uruchomieniem! #
 # Jest ona wypelniona wartosciami domyslnymi, jezeli #
 # zostaly uzyte inne, skrypt nie zadziala!           #
 ######################################################
 
+# full path to repository directory
 # pelna sciezka do katalogu repozytorium 
 APCUPS_location="/home/cti/APCUPS"
 
